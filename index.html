@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A proposed Rapid KL bus service reliability dashboard for monitoring departures, managing service gaps and coordinating operational responses.">
+  <meta name="theme-color" content="#003135">
+  <title>Rapid KL Service Control — Bus Reliability Dashboard</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-bus" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="16" rx="3"/><path d="M5 11h14M8 19v2m8-2v2M9 6h6"/><circle cx="8.5" cy="15.5" r=".5"/><circle cx="15.5" cy="15.5" r=".5"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="m10.3 4-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3l-8-14a2 2 0 0 0-3.4 0ZM12 9v4m0 4h.01"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 3v17h17M8 15l4-5 4 2 5-7"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 11a9 9 0 0 1-9 9 10 10 0 0 1-4-.8L3 21l1.8-5A9 9 0 1 1 21 11Z"/><path d="M8 10h8m-8 4h5"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="m8 3-4 1c-3 7 9 19 16 16l1-4-5-3-2 2a14 14 0 0 1-5-5l2-2-3-5Z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 4H4v16h5m4-8h8m-4-4 4 4-4 4"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/></symbol>
+  </defs></svg>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#home" class="brand" aria-label="Rapid KL Service Control home">
+        <img class="brand-image" src="assets/rapidkl-bus.webp" alt="Rapid KL bus" width="60" height="48">
+        <span class="brand-type">rapid<span>KL</span><small>SERVICE CONTROL</small></span>
+      </a>
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+        <a href="#home" class="nav-link active" aria-current="location">Overview</a>
+        <a href="#dashboard" class="nav-link">Service dashboard</a>
+        <a href="#how-it-works" class="nav-link">How it works</a>
+        <a href="#support" class="nav-link">Help & support</a>
+      </nav>
+      <div class="header-actions">
+        <button class="login-button" id="login-button" type="button"><svg class="icon"><use href="#i-user"/></svg><span>Staff login</span></button>
+        <button class="icon-button mobile-menu" id="mobile-menu" type="button" aria-label="Open navigation" aria-controls="main-nav" aria-expanded="false"><svg class="icon"><use href="#i-menu"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-grid-pattern" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow hero-eyebrow"><span class="small-line"></span> BUS SERVICE RELIABILITY</div>
+          <h1 id="hero-title">Better timing.<br><span>Better journeys.</span></h1>
+          <p>A clearer view of every departure. Spot service gaps, coordinate a response and keep passengers informed.</p>
+          <div class="hero-actions"><a class="button button-bright" href="#dashboard">Explore the dashboard <svg class="icon"><use href="#i-arrow"/></svg></a><a class="hero-secondary" href="#how-it-works">See how it works <span>↗</span></a></div>
+          <div class="hero-caption"><svg class="icon"><use href="#i-pin"/></svg> Designed for bus controllers & terminal dispatchers</div>
+        </div>
+        <figure class="hero-visual">
+          <img src="assets/rapidkl-bus.webp" alt="A Rapid KL bus waiting at a bus stop in Kuala Lumpur" width="1600" height="1067" fetchpriority="high">
+          <div class="hero-image-shade"></div>
+          <div class="photo-tag"><span class="status-dot"></span> Connecting the city, one journey at a time</div>
+          <figcaption>Photo by <a href="https://commons.wikimedia.org/wiki/File:Kuala_Lumpur_Malaysia_rapidKL-bus-01.jpg" target="_blank" rel="noopener noreferrer">CEphoto, Uwe Aranas</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a> · Display cropped</figcaption>
+        </figure>
+      </div>
+      <div class="hero-bottom container"><span>MONITOR. UNDERSTAND. RESPOND.</span><a href="#dashboard">Your service overview <span>↓</span></a></div>
+    </section>
+
+    <section class="dashboard-section section" id="dashboard" aria-labelledby="dashboard-title">
+      <div class="container">
+        <div class="section-heading">
+          <div><div class="eyebrow">THE OPERATIONS DESK</div><h2 id="dashboard-title">See the gap. Take action.</h2><p>Understand the interval between buses, then coordinate the next step.</p></div>
+          <div class="sample-badge"><span></span> Sample data <strong>12:20 MYT</strong></div>
+        </div>
+        <div class="dashboard-shell">
+          <div class="dashboard-toolbar">
+            <div class="route-picker"><label for="route-select">Route & direction</label><select id="route-select"><option value="D01">D01 · Sunway University → USJ 7</option><option value="D02">D02 · KLCC → Mid Valley</option><option value="D03">D03 · Penang → Sabah</option></select></div>
+            <div class="toolbar-context"><svg class="icon"><use href="#i-pin"/></svg><div id="stop-context">Sunway Terminal<small>Illustrative routes and times</small></div></div>
+            <button class="button button-outline button-small" id="passenger-update-button" type="button"><svg class="icon"><use href="#i-message"/></svg> Passenger update</button>
+          </div>
+          <div class="metrics" id="metrics" aria-live="polite"></div>
+          <div class="dashboard-grid">
+            <section class="panel interval-panel" aria-labelledby="interval-heading">
+              <div class="panel-heading"><div><h3 id="interval-heading">A little space makes a difference.</h3><p>Intervals at the same stop, in the same direction</p></div><span class="small-icon"><svg class="icon"><use href="#i-chart"/></svg></span></div>
+              <div class="interval-chart" id="interval-chart" role="img" aria-label="Bus interval comparison"></div>
+              <div class="chart-legend"><span><i class="legend-dot confirmed"></i> Confirmed interval</span><span><i class="legend-dot forecast"></i> Forecast interval</span><span><i class="legend-line"></i> Target interval</span></div>
+              <div class="insight" id="interval-insight"><svg class="icon"><use href="#i-info"/></svg><p></p></div>
+            </section>
+            <section class="panel alerts-panel" aria-labelledby="alerts-heading">
+              <div class="panel-heading"><div><h3 id="alerts-heading">Needs your attention</h3><p>Prioritised by service impact</p></div><span class="count-badge" id="alert-count">2</span></div>
+              <div id="alerts-list" class="alerts-list"></div>
+            </section>
+          </div>
+          <div class="dashboard-lower">
+            <section class="panel departures-panel" aria-labelledby="departures-heading">
+              <div class="panel-heading"><div><h3 id="departures-heading">Departure board</h3><p>Planned times, current estimates and next actions</p></div><span class="table-label">TODAY'S SCENARIO</span></div>
+              <div class="table-scroll"><table class="departures-table"><thead><tr><th scope="col">Bus / trip</th><th scope="col">Planned</th><th scope="col">Actual / estimate</th><th scope="col">Status</th><th scope="col"><span class="sr-only">Action</span></th></tr></thead><tbody id="departures-body"></tbody></table></div>
+            </section>
+            <section class="panel activity-panel" aria-labelledby="activity-heading"><div class="panel-heading"><div><h3 id="activity-heading">Response activity</h3><p>Every action, accounted for</p></div></div><ol id="activity-list" class="activity-list"></ol></section>
+          </div>
+          <div class="dashboard-footnote"><span><svg class="icon"><use href="#i-info"/></svg> Student concept · Illustrative data, not a live Rapid KL feed</span><button class="text-button" id="reset-demo" type="button">Reset demo</button></div>
+        </div>
+        <section class="passenger-notice" aria-labelledby="passenger-notice-heading"><div class="notice-icon"><svg class="icon"><use href="#i-message"/></svg></div><div><span class="eyebrow">PASSENGER INFORMATION PREVIEW</span><h3 id="passenger-notice-heading">Keep everyone in the loop.</h3><p id="passenger-notice-text">No service notice has been prepared. Staff can create an update from the dashboard.</p><small id="passenger-notice-time">Demo notices appear here only; nothing is sent to passengers.</small></div></section>
+      </div>
+    </section>
+
+    <section class="how-section section" id="how-it-works" aria-labelledby="how-title">
+      <div class="container"><div class="section-heading"><div><div class="eyebrow">FROM INFORMATION TO ACTION</div><h2 id="how-title">A clearer next step, every time.</h2><p>One focused workflow for the people keeping buses moving.</p></div><span class="section-side-note">Built around real<br>operational decisions.</span></div>
+        <div class="steps"><article class="step"><span class="step-number">01</span><div class="step-icon"><svg class="icon"><use href="#i-chart"/></svg></div><h3>Spot the irregularity</h3><p>Compare actual and forecast intervals with the route's target. Find departures that need a closer look.</p><span class="step-foot">A clear view of the service</span></article><article class="step"><span class="step-number">02</span><div class="step-icon"><svg class="icon"><use href="#i-alert"/></svg></div><h3>Understand the situation</h3><p>Review the driver's report, timestamps and trip details. See what is known before choosing a response.</p><span class="step-foot">Context before a decision</span></article><article class="step"><span class="step-number">03</span><div class="step-icon"><svg class="icon"><use href="#i-check"/></svg></div><h3>Coordinate a response</h3><p>Request assistance, review approval and prepare a passenger notice. Keep a visible record of the next action.</p><span class="step-foot">An owner for every action</span></article></div>
+      </div>
+    </section>
+
+    <section class="support-section section" id="support" aria-labelledby="support-title">
+      <div class="container support-grid"><div class="support-intro"><div class="eyebrow">HERE TO HELP</div><h2 id="support-title">Good service starts<br>with a conversation.</h2><p>Have a question about your journey? Reach Rapid KL through its official customer service channels.</p><div class="support-contact"><a href="tel:+60378852585"><svg class="icon"><use href="#i-phone"/></svg><span><small>RAPID KL HELPLINE</small>03-7885 2585</span><span class="contact-arrow">↗</span></a><a href="mailto:suggest@rapidkl.com.my"><svg class="icon"><use href="#i-mail"/></svg><span><small>EMAIL CUSTOMER SERVICE</small>suggest@rapidkl.com.my</span><span class="contact-arrow">↗</span></a></div><button class="button button-dark" id="support-button" type="button">Try the enquiry form <svg class="icon"><use href="#i-arrow"/></svg></button><p class="support-disclaimer">The prototype enquiry form saves a demo record on this device. Use the official channels above for actual assistance.</p></div>
+        <div class="faq"><h3>A few helpful answers</h3><details><summary>What does the interval between buses mean?</summary><p>Also called headway, it is the time between consecutive buses passing the same stop in the same direction. The target can vary by route and operating period.</p></details><details><summary>Are these actual bus arrival times?</summary><p>No. This student prototype uses fictional routes, times and incidents to demonstrate the proposed workflow. It is not connected to Rapid KL operations.</p></details><details><summary>Who can use the service dashboard?</summary><p>The concept is designed for operations controllers, terminal dispatchers and depot supervisors. You can explore the sample data, then use a demo staff account to try operational actions.</p></details><details><summary>Does a replacement request change an arrival time?</summary><p>No. A request must be reviewed, and vehicle availability must be confirmed. The forecast stays unchanged until there is a confirmed operational update.</p></details><details><summary>How can I try the staff login?</summary><p>Select Staff login, choose Controller or Supervisor, and select Fill demo credentials. These accounts only demonstrate the interface; they do not provide access to a real staff system.</p></details></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-main"><div class="footer-brand"><a class="brand footer-wordmark" href="#home"><svg class="icon"><use href="#i-bus"/></svg><span class="brand-type">rapid<span>KL</span><small>SERVICE CONTROL</small></span></a><p>A proposed interface for more dependable bus service and clearer operational decisions.</p><span class="footer-concept">CSC3024 · HCI STUDENT CONCEPT</span></div><div><h3>Explore</h3><a href="#home">Overview</a><a href="#dashboard">Service dashboard</a><a href="#how-it-works">How it works</a><a href="#support">Help & support</a></div><div><h3>Useful links</h3><a href="https://myrapid.com.my/" target="_blank" rel="noopener noreferrer">Official MyRapid website ↗</a><a href="https://doi.org/10.1371/journal.pone.0232799" target="_blank" rel="noopener noreferrer">Service reliability research ↗</a><a href="https://sdgs.un.org/goals/goal11" target="_blank" rel="noopener noreferrer">Sustainable transport · SDG 11 ↗</a></div><div><h3>Stay connected</h3><a href="tel:+60378852585">03-7885 2585</a><a href="mailto:suggest@rapidkl.com.my">suggest@rapidkl.com.my</a><button class="footer-link" id="privacy-button" type="button">About this prototype</button></div></div><div class="footer-bottom"><p>© 2026 HCI student project. An independent concept, not an official Rapid KL website.</p><a href="#home">Back to top ↑</a></div></div></footer>
+
+  <dialog class="modal login-modal" id="login-dialog" aria-labelledby="login-title"><button class="dialog-close icon-button" data-close type="button" aria-label="Close login"><svg class="icon"><use href="#i-close"/></svg></button><div class="modal-symbol"><svg class="icon"><use href="#i-user"/></svg></div><div class="eyebrow">YOUR OPERATIONS DESK</div><h2 id="login-title">Welcome back.</h2><p class="modal-description">Sign in to try the staff response workflow.</p><div class="demo-hint"><strong>Demo staff login</strong><span>Use the sample accounts below. No real staff credentials are needed.</span></div><form id="login-form"><fieldset class="role-picker"><legend>Choose a demo role</legend><label><input type="radio" name="role" value="controller" checked><span>Controller</span></label><label><input type="radio" name="role" value="supervisor"><span>Supervisor</span></label></fieldset><button type="button" class="fill-credentials" id="fill-credentials">Fill demo credentials <span>↙</span></button><label class="field-label" for="login-email">Staff email</label><input id="login-email" name="email" type="email" autocomplete="off" required placeholder="controller@rapidkl.demo"><label class="field-label" for="login-password">Password</label><div class="password-field"><input id="login-password" name="password" type="password" autocomplete="off" required placeholder="Enter the demo password"><button id="toggle-password" type="button" aria-label="Show password" aria-pressed="false"><svg class="icon"><use href="#i-eye"/></svg></button></div><p class="form-error" id="login-error" role="alert" hidden></p><button class="button button-dark full-width" type="submit">Log in <svg class="icon"><use href="#i-arrow"/></svg></button></form><p class="modal-fineprint">Interface demonstration only. Real authentication requires a secure server.</p></dialog>
+
+  <dialog class="modal account-modal" id="account-dialog" aria-labelledby="account-title"><button class="dialog-close icon-button" data-close type="button" aria-label="Close account"><svg class="icon"><use href="#i-close"/></svg></button><div class="modal-symbol"><svg class="icon"><use href="#i-user"/></svg></div><h2 id="account-title">Your demo account</h2><div id="account-info"></div><button class="button button-dark full-width" id="logout-button" type="button"><svg class="icon"><use href="#i-logout"/></svg> Log out</button></dialog>
+
+  <dialog class="modal incident-modal" id="incident-dialog" aria-labelledby="incident-title"><button class="dialog-close icon-button" data-close type="button" aria-label="Close incident"><svg class="icon"><use href="#i-close"/></svg></button><div id="incident-content"></div></dialog>
+
+  <dialog class="modal notice-modal" id="notice-dialog" aria-labelledby="notice-title"><button class="dialog-close icon-button" data-close type="button" aria-label="Close passenger update"><svg class="icon"><use href="#i-close"/></svg></button><div class="eyebrow">KEEP PASSENGERS INFORMED</div><h2 id="notice-title">Prepare a service update</h2><p class="modal-description">Create a preview for the selected route. This demo does not send messages to passengers.</p><form id="notice-form"><label class="field-label" for="notice-message">Passenger message</label><textarea id="notice-message" rows="5" minlength="15" maxlength="400" required></textarea><p class="field-help">Include the route, disruption and revised estimate if confirmed.</p><button class="button button-dark full-width" type="submit">Save notice preview <svg class="icon"><use href="#i-arrow"/></svg></button></form></dialog>
+
+  <dialog class="modal support-modal" id="support-dialog" aria-labelledby="support-dialog-title"><button class="dialog-close icon-button" data-close type="button" aria-label="Close enquiry"><svg class="icon"><use href="#i-close"/></svg></button><div class="eyebrow">CUSTOMER SERVICE</div><h2 id="support-dialog-title">How can we help?</h2><p class="modal-description">Try the enquiry flow. Your entry stays on this device and is not sent to Rapid KL. Please use sample details.</p><form id="support-form"><label class="field-label" for="enquiry-topic">Enquiry topic</label><select id="enquiry-topic" required>
+<option value="">Choose a topic</option>
+<option value="waiting">Bus waiting time</option>
+<option value="information">Service information</option>
+<option value="accessibility">Accessibility</option>
+<option value="other">Other feedback</option>
+</select><label class="field-label" for="enquiry-message">Your message</label><textarea id="enquiry-message" rows="4" minlength="10" maxlength="1000" required placeholder="Describe a sample enquiry…"></textarea><button type="submit" class="button button-dark full-width">Save demo enquiry <svg class="icon"><use href="#i-arrow"/></svg></button></form><div id="enquiry-success" class="enquiry-success" role="status" hidden></div></dialog>
+
+  <dialog class="modal" id="about-dialog" aria-labelledby="about-title"><button class="dialog-close icon-button" data-close type="button" aria-label="Close information"><svg class="icon"><use href="#i-close"/></svg></button><div class="eyebrow">ABOUT THIS CONCEPT</div><h2 id="about-title">A student design proposal.</h2><p>This independent HCI prototype explores irregular departures and uneven intervals between buses. It is not affiliated with Rapid KL, Prasarana or their staff systems.</p><p>All routes, incidents, accounts and operational times are illustrative. Demo actions are stored in this browser; they are not sent to an operator or passengers. Passwords are not stored.</p><p>The bus photograph is by <a href="https://commons.wikimedia.org/wiki/File:Kuala_Lumpur_Malaysia_rapidKL-bus-01.jpg" target="_blank" rel="noopener noreferrer">CEphoto, Uwe Aranas</a>, used under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>, resized and displayed cropped.</p></dialog>
+  <dialog class="modal" id="reset-dialog" aria-labelledby="reset-title"><button class="dialog-close icon-button" data-close type="button" aria-label="Close reset confirmation"><svg class="icon"><use href="#i-close"/></svg></button><h2 id="reset-title">Start the demo again?</h2><p>This clears saved demo responses, notice previews and enquiries on this device. Your demo login stays active.</p><div class="modal-actions"><button class="button button-outline" data-close type="button">Keep my changes</button><button class="button button-dark" id="confirm-reset" type="button">Reset demo</button></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <noscript><div class="noscript-note">Enable JavaScript to use the sample dashboard and demo login. The customer service phone and email links remain available.</div></noscript>
+</body>
+</html>
