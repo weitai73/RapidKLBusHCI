@@ -71,6 +71,7 @@ body, .site-header, .dashboard-section, .how-section, .support-section,
   transition: opacity 1s ease;
 }
 .sun-disc {
+  z-index: 1;
   width: 58px; height: 58px; top: 13%; right: 43%; border-radius: 50%;
   background: #fff9df;
   box-shadow: 0 0 45px 22px rgb(255 244 196 / 45%), 0 0 100px 48px rgb(255 236 165 / 18%);
@@ -84,6 +85,7 @@ body, .site-header, .dashboard-section, .how-section, .support-section,
   transition: opacity 1s ease;
 }
 .moon {
+  z-index: 1;
   width: 51px; height: 51px; top: 15%; right: 44%; border-radius: 50%; opacity: 0;
   background: radial-gradient(circle at 35% 32%, #f0f5e9, #c6dbe0 65%, #9dbbc9);
   box-shadow: 0 0 45px 9px rgb(193 223 245 / 16%), 0 0 110px 30px rgb(163 210 243 / 8%);
@@ -109,6 +111,7 @@ body, .site-header, .dashboard-section, .how-section, .support-section,
 }
 .shooting-star-two { top: 30%; left: 76%; animation-delay: 12s; animation-duration: 23s; }
 .cloud {
+  z-index: 2;
   width: 39vmin; height: 15vmin; border-radius: 50%;
   background: radial-gradient(ellipse, rgb(255 255 255 / 74%), rgb(255 255 255 / 34%) 47%, transparent 72%);
   filter: blur(15px); transition: opacity 1s;
@@ -154,7 +157,7 @@ body, .site-header, .dashboard-section, .how-section, .support-section,
   mask-image: radial-gradient(ellipse, #000, transparent 70%);
   animation: water-ripple 7s ease-in-out infinite alternate;
 }
-.scene-scrim { inset: 0; background: linear-gradient(90deg, rgb(234 247 247 / 97%) 0%, rgb(234 247 247 / 93%) 28%, rgb(234 247 247 / 55%) 46%, transparent 68%); transition: background .8s; }
+.scene-scrim { z-index: 3; inset: 0; background: linear-gradient(90deg, rgb(234 247 247 / 97%) 0%, rgb(234 247 247 / 93%) 28%, rgb(234 247 247 / 55%) 46%, transparent 68%); transition: background .8s; }
 
 [data-theme="night"] .sky-night { opacity: 1; }
 [data-theme="night"] :is(.sun-halo, .sun-disc, .sun-rays) { opacity: 0; }
