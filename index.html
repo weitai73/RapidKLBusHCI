@@ -5,12 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="A proposed Rapid KL bus service reliability dashboard for monitoring departures, managing service gaps and coordinating operational responses.">
   <meta name="theme-color" content="#003135">
+  <meta name="color-scheme" content="light dark">
   <title>Rapid KL Service Control — Bus Reliability Dashboard</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/klcc.png" as="image">
+  <script src="theme.js"></script>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="atmosphere.css">
   <script src="script.js" defer></script>
 </head>
 <body>
+  <div class="ambient-scene" aria-hidden="true">
+    <div class="sky-night"></div>
+    <div class="sun-halo"></div>
+    <div class="sun-disc"></div>
+    <div class="sun-rays"></div>
+    <div class="moon"></div>
+    <div class="sky-stars stars-near"></div>
+    <div class="sky-stars stars-far"></div>
+    <div class="shooting-star shooting-star-one"></div>
+    <div class="shooting-star shooting-star-two"></div>
+    <div class="cloud cloud-one"></div>
+    <div class="cloud cloud-two"></div>
+    <div class="cloud cloud-three"></div>
+    <div class="city-scene">
+      <div class="city-photo"></div>
+      <div class="city-illumination"></div>
+      <div class="tower-beacon beacon-left"></div>
+      <div class="tower-beacon beacon-right"></div>
+      <div class="water-shimmer"></div>
+    </div>
+    <div class="scene-scrim"></div>
+  </div>
   <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
@@ -28,6 +54,10 @@
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
     <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 4H4v16h5m4-8h8m-4-4 4 4-4 4"/></symbol>
     <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
   </defs></svg>
 
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -44,6 +74,10 @@
         <a href="#support" class="nav-link">Help & support</a>
       </nav>
       <div class="header-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Night mode" title="Switch to night mode" hidden>
+          <span class="theme-toggle-track" aria-hidden="true"><span class="theme-toggle-thumb"><svg class="icon theme-sun"><use href="#i-sun"/></svg><svg class="icon theme-moon"><use href="#i-moon"/></svg></span></span>
+          <span id="theme-label" aria-hidden="true">Day</span>
+        </button>
         <button class="login-button" id="login-button" type="button"><svg class="icon"><use href="#i-user"/></svg><span>Staff login</span></button>
         <button class="icon-button mobile-menu" id="mobile-menu" type="button" aria-label="Open navigation" aria-controls="main-nav" aria-expanded="false"><svg class="icon"><use href="#i-menu"/></svg></button>
       </div>
@@ -58,15 +92,16 @@
           <div class="eyebrow hero-eyebrow"><span class="small-line"></span> BUS SERVICE RELIABILITY</div>
           <h1 id="hero-title">Better timing.<br><span>Better journeys.</span></h1>
           <p>A clearer view of every departure. Spot service gaps, coordinate a response and keep passengers informed.</p>
-          <div class="hero-actions"><a class="button button-bright" href="#dashboard">Explore the dashboard <svg class="icon"><use href="#i-arrow"/></svg></a><a class="hero-secondary" href="#how-it-works">See how it works <span>↗</span></a></div>
+          <div class="hero-actions"><a class="button button-bright" href="#dashboard">Explore the dashboard</a><a class="hero-secondary" href="#how-it-works">See how it works</a></div>
           <div class="hero-caption"><svg class="icon"><use href="#i-pin"/></svg> Designed for bus controllers & terminal dispatchers</div>
         </div>
-        <figure class="hero-visual">
-          <img src="assets/rapidkl-bus.webp" alt="A Rapid KL bus waiting at a bus stop in Kuala Lumpur" width="1600" height="1067" fetchpriority="high">
-          <div class="hero-image-shade"></div>
-          <div class="photo-tag"><span class="status-dot"></span> Connecting the city, one journey at a time</div>
-          <figcaption>Photo by <a href="https://commons.wikimedia.org/wiki/File:Kuala_Lumpur_Malaysia_rapidKL-bus-01.jpg" target="_blank" rel="noopener noreferrer">CEphoto, Uwe Aranas</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a> · Display cropped</figcaption>
-        </figure>
+        <div class="city-window" aria-label="KLCC skyline with an animated day and night atmosphere">
+          <div class="city-caption">
+            <div class="city-caption-icon" aria-hidden="true"><svg class="icon"><use id="scene-phase-icon" href="#i-sun"/></svg></div>
+            <div><span class="city-caption-place">Kuala Lumpur, Malaysia</span><span class="scene-phase" id="scene-phase">Morning light</span></div>
+            <button class="motion-toggle" id="motion-toggle" type="button" aria-pressed="false" aria-label="Pause background animation" hidden><svg class="icon" aria-hidden="true"><use id="motion-icon" href="#i-pause"/></svg><span id="motion-label">Pause motion</span></button>
+          </div>
+        </div>
       </div>
       <div class="hero-bottom container"><span>MONITOR. UNDERSTAND. RESPOND.</span><a href="#dashboard">Your service overview <span>↓</span></a></div>
     </section>

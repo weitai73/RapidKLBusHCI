@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 493 740">
+  <!-- Illumination stays inside the photographed tower facades. -->
+  <g fill="white">
+    <path d="M121 552 130 349 146 219 159 143 169 106 181 83 189 63 193 85 203 111 212 157 223 285 215 552Z"/>
+    <path d="M329 550 320 450 315 355 313 280 315 220 319 168 324 133 328 111 334 130 343 164 356 249 372 359 387 468 399 550Z"/>
+    <path d="M226 344H315V350H226Z"/>
+  </g>
+</svg>
