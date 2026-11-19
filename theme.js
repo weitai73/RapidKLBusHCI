@@ -32,8 +32,6 @@
     button.setAttribute("aria-checked", String(night));
     button.title = night ? "Switch to day mode" : "Switch to night mode";
     document.getElementById("theme-label").textContent = night ? "Night" : "Day";
-    document.getElementById("scene-phase").textContent = night ? "City after dark" : "Morning light";
-    document.getElementById("scene-phase-icon").setAttribute("href", night ? "#i-moon" : "#i-sun");
   }
 
   function applyMotion() {
@@ -47,7 +45,7 @@
     button.setAttribute("aria-pressed", String(paused));
     button.setAttribute("aria-label", reducedMotion.matches ? "Background animation disabled by reduced-motion preference" : paused ? "Play background animation" : "Pause background animation");
     button.title = reducedMotion.matches ? "Animations follow your device's reduced-motion setting" : "";
-    document.getElementById("motion-label").textContent = reducedMotion.matches ? "Motion reduced" : paused ? "Play motion" : "Pause motion";
+    document.getElementById("motion-label").textContent = reducedMotion.matches ? "Background motion reduced" : paused ? "Play background animation" : "Pause background animation";
     document.getElementById("motion-icon").setAttribute("href", paused ? "#i-play" : "#i-pause");
   }
 

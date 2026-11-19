@@ -9,9 +9,10 @@
   <title>Rapid KL Service Control — Bus Reliability Dashboard</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/klcc.png" as="image">
-  <script src="theme.js"></script>
+  <link rel="preload" href="assets/klcc-night.png" as="image">
+  <script src="theme.js?v=20261119-3"></script>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="atmosphere.css?v=20261119-2">
+  <link rel="stylesheet" href="atmosphere.css?v=20261119-3">
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -30,12 +31,11 @@
     <div class="cloud cloud-three"></div>
     <div class="city-scene">
       <div class="city-photo"></div>
-      <div class="city-illumination"></div>
-      <div class="tower-beacon beacon-left"></div>
-      <div class="tower-beacon beacon-right"></div>
       <div class="water-shimmer"></div>
     </div>
+    <div class="night-scene"><img class="night-photo" src="assets/klcc-night.png" alt="" width="606" height="404" decoding="async"></div>
     <div class="scene-scrim"></div>
+    <div class="scene-scrim-night"></div>
   </div>
   <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
@@ -95,13 +95,7 @@
           <div class="hero-actions"><a class="button button-bright" href="#dashboard">Explore the dashboard</a><a class="hero-secondary" href="#how-it-works">See how it works</a></div>
           <div class="hero-caption"><svg class="icon"><use href="#i-pin"/></svg> Designed for bus controllers & terminal dispatchers</div>
         </div>
-        <div class="city-window" aria-label="KLCC skyline with an animated day and night atmosphere">
-          <div class="city-caption">
-            <div class="city-caption-icon" aria-hidden="true"><svg class="icon"><use id="scene-phase-icon" href="#i-sun"/></svg></div>
-            <div><span class="city-caption-place">Kuala Lumpur, Malaysia</span><span class="scene-phase" id="scene-phase">Morning light</span></div>
-            <button class="motion-toggle" id="motion-toggle" type="button" aria-pressed="false" aria-label="Pause background animation" hidden><svg class="icon" aria-hidden="true"><use id="motion-icon" href="#i-pause"/></svg><span id="motion-label">Pause motion</span></button>
-          </div>
-        </div>
+        <div class="city-window" aria-hidden="true"></div>
       </div>
       <div class="hero-bottom container"><span>MONITOR. UNDERSTAND. RESPOND.</span><a href="#dashboard">Your service overview <span>↓</span></a></div>
     </section>
@@ -157,7 +151,7 @@
     </section>
   </main>
 
-  <footer class="site-footer"><div class="container"><div class="footer-main"><div class="footer-brand"><a class="brand footer-wordmark" href="#home"><svg class="icon"><use href="#i-bus"/></svg><span class="brand-type">rapid<span>KL</span><small>SERVICE CONTROL</small></span></a><p>A proposed interface for more dependable bus service and clearer operational decisions.</p><span class="footer-concept">CSC3024 · HCI STUDENT CONCEPT</span></div><div><h3>Explore</h3><a href="#home">Overview</a><a href="#dashboard">Service dashboard</a><a href="#how-it-works">How it works</a><a href="#support">Help & support</a></div><div><h3>Useful links</h3><a href="https://myrapid.com.my/" target="_blank" rel="noopener noreferrer">Official MyRapid website ↗</a><a href="https://doi.org/10.1371/journal.pone.0232799" target="_blank" rel="noopener noreferrer">Service reliability research ↗</a><a href="https://sdgs.un.org/goals/goal11" target="_blank" rel="noopener noreferrer">Sustainable transport · SDG 11 ↗</a></div><div><h3>Stay connected</h3><a href="tel:+60378852585">03-7885 2585</a><a href="mailto:suggest@rapidkl.com.my">suggest@rapidkl.com.my</a><button class="footer-link" id="privacy-button" type="button">About this prototype</button></div></div><div class="footer-bottom"><p>© 2026 HCI student project. An independent concept, not an official Rapid KL website.</p><a href="#home">Back to top ↑</a></div></div></footer>
+  <footer class="site-footer"><div class="container"><div class="footer-main"><div class="footer-brand"><a class="brand footer-wordmark" href="#home"><svg class="icon"><use href="#i-bus"/></svg><span class="brand-type">rapid<span>KL</span><small>SERVICE CONTROL</small></span></a><p>A proposed interface for more dependable bus service and clearer operational decisions.</p><span class="footer-concept">CSC3024 · HCI STUDENT CONCEPT</span></div><div><h3>Explore</h3><a href="#home">Overview</a><a href="#dashboard">Service dashboard</a><a href="#how-it-works">How it works</a><a href="#support">Help & support</a></div><div><h3>Useful links</h3><a href="https://myrapid.com.my/" target="_blank" rel="noopener noreferrer">Official MyRapid website ↗</a><a href="https://doi.org/10.1371/journal.pone.0232799" target="_blank" rel="noopener noreferrer">Service reliability research ↗</a><a href="https://sdgs.un.org/goals/goal11" target="_blank" rel="noopener noreferrer">Sustainable transport · SDG 11 ↗</a></div><div><h3>Stay connected</h3><a href="tel:+60378852585">03-7885 2585</a><a href="mailto:suggest@rapidkl.com.my">suggest@rapidkl.com.my</a><button class="footer-link" id="privacy-button" type="button">About this prototype</button></div></div><div class="footer-bottom"><p>© 2026 HCI student project. An independent concept, not an official Rapid KL website.</p><a href="#home">Back to top ↑</a></div></div><div class="background-controls"><button class="background-motion-control" id="motion-toggle" type="button" aria-pressed="false" aria-label="Pause background animation" hidden><svg class="icon" aria-hidden="true"><use id="motion-icon" href="#i-pause"/></svg><span id="motion-label">Pause background animation</span></button></div></footer>
 
   <dialog class="modal login-modal" id="login-dialog" aria-labelledby="login-title"><button class="dialog-close icon-button" data-close type="button" aria-label="Close login"><svg class="icon"><use href="#i-close"/></svg></button><div class="modal-symbol"><svg class="icon"><use href="#i-user"/></svg></div><div class="eyebrow">YOUR OPERATIONS DESK</div><h2 id="login-title">Welcome back.</h2><p class="modal-description">Sign in to try the staff response workflow.</p><div class="demo-hint"><strong>Demo staff login</strong><span>Use the sample accounts below. No real staff credentials are needed.</span></div><form id="login-form"><fieldset class="role-picker"><legend>Choose a demo role</legend><label><input type="radio" name="role" value="controller" checked><span>Controller</span></label><label><input type="radio" name="role" value="supervisor"><span>Supervisor</span></label></fieldset><button type="button" class="fill-credentials" id="fill-credentials">Fill demo credentials <span>↙</span></button><label class="field-label" for="login-email">Staff email</label><input id="login-email" name="email" type="email" autocomplete="off" required placeholder="controller@rapidkl.demo"><label class="field-label" for="login-password">Password</label><div class="password-field"><input id="login-password" name="password" type="password" autocomplete="off" required placeholder="Enter the demo password"><button id="toggle-password" type="button" aria-label="Show password" aria-pressed="false"><svg class="icon"><use href="#i-eye"/></svg></button></div><p class="form-error" id="login-error" role="alert" hidden></p><button class="button button-dark full-width" type="submit">Log in <svg class="icon"><use href="#i-arrow"/></svg></button></form><p class="modal-fineprint">Interface demonstration only. Real authentication requires a secure server.</p></dialog>
 
@@ -177,6 +171,7 @@
 
   <dialog class="modal" id="about-dialog" aria-labelledby="about-title"><button class="dialog-close icon-button" data-close type="button" aria-label="Close information"><svg class="icon"><use href="#i-close"/></svg></button><div class="eyebrow">ABOUT THIS CONCEPT</div><h2 id="about-title">A student design proposal.</h2><p>This independent HCI prototype explores irregular departures and uneven intervals between buses. It is not affiliated with Rapid KL, Prasarana or their staff systems.</p><p>All routes, incidents, accounts and operational times are illustrative. Demo actions are stored in this browser; they are not sent to an operator or passengers. Passwords are not stored.</p><p>The bus photograph is by <a href="https://commons.wikimedia.org/wiki/File:Kuala_Lumpur_Malaysia_rapidKL-bus-01.jpg" target="_blank" rel="noopener noreferrer">CEphoto, Uwe Aranas</a>, used under <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>, resized and displayed cropped.</p></dialog>
   <dialog class="modal" id="reset-dialog" aria-labelledby="reset-title"><button class="dialog-close icon-button" data-close type="button" aria-label="Close reset confirmation"><svg class="icon"><use href="#i-close"/></svg></button><h2 id="reset-title">Start the demo again?</h2><p>This clears saved demo responses, notice previews and enquiries on this device. Your demo login stays active.</p><div class="modal-actions"><button class="button button-outline" data-close type="button">Keep my changes</button><button class="button button-dark" id="confirm-reset" type="button">Reset demo</button></div></dialog>
+
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
   <noscript><div class="noscript-note">Enable JavaScript to use the sample dashboard and demo login. The customer service phone and email links remain available.</div></noscript>
 </body>
